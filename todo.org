@@ -2,15 +2,18 @@
 ** TODO Enkel JS-applikasjon
 
 * TODO Mapbox-kart
-** TODO Høgdedata og skygging
+** DONE Høgdedata og skygging
 ** TODO Kunne endre skyggefarge for å sjekke skredterreng
-** TODO Vei-data
+** DONE Vei-data
 ** TODO Kartdata
+** TODO Leaflet locate
+** TODO Hent høgdeprofil frå kartverket. Må lagre gpx fil ein plass og serve til service.
+https://azure.microsoft.com/nb-no/documentation/articles/storage-nodejs-how-to-use-blob-storage/
 
 
 * TODO Snødata
 Hent frå NVE sine servicer. www.xgeo.no
-** TODO Legg til i kart frå wms.
+** DONE Legg til i kart frå wms.
 https://www.mapbox.com/mapbox.js/example/v1.0.0/wms/
 ** TODO Sjekk med NVE om bruk er ok?
 ** TODO Skredfaregrad
@@ -32,3 +35,5 @@ Hent frå met.no sine api/servicer
 * TODO Tegne rute i kart
 ** TODO Lengde
 ** TODO Høgdeprofil
+
+* TODO Lisensgreier. Legg til navn for tenester
