@@ -1,0 +1,34 @@
+* TODO Nettside med mapbox-kart
+** TODO Enkel JS-applikasjon
+
+* TODO Mapbox-kart
+** TODO Høgdedata og skygging
+** TODO Kunne endre skyggefarge for å sjekke skredterreng
+** TODO Vei-data
+** TODO Kartdata
+
+
+* TODO Snødata
+Hent frå NVE sine servicer. www.xgeo.no
+** TODO Legg til i kart frå wms.
+https://www.mapbox.com/mapbox.js/example/v1.0.0/wms/
+** TODO Sjekk med NVE om bruk er ok?
+** TODO Skredfaregrad
+Finn ut om varsom.no/NVE har tilgjengeleg varsel/observasjon. http://api.nve.no/
+** TODO Skredterreng
+http://gis2.ngi.no/arcgisprodpub/rest/services/Skred/BratteOmr/MapServer/export?dpi=96&transparent=true&format=png24&layers=show%3A0&bbox=7984.395902125085%2C6795358.564050461%2C106536.59300651931%2C6863176.699686733&bboxSR=25833&imageSR=25833&size=1164%2C801&f=image
+
+
+* TODO Værdata
+Hent frå met.no sine api/servicer
+** TODO Værvarsel basert på lokasjon
+** TODO Radarbileter?
+** TODO GRIB?
+** TODO Målestasjoner
+*** TODO Legg i kart
+*** TODO Sjå observert veir frå næraste målestasjon
+** TODO Vind (animasjon?)
+
+* TODO Tegne rute i kart
+** TODO Lengde
+** TODO Høgdeprofil
