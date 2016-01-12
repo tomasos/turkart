@@ -7,20 +7,19 @@
 ** DONE Vei-data
 ** TODO Kartdata
 ** TODO Leaflet locate
-** TODO Hent høgdeprofil frå kartverket. Må lagre gpx fil ein plass og serve til service.
-https://azure.microsoft.com/nb-no/documentation/articles/storage-nodejs-how-to-use-blob-storage/
 
 
 * TODO Snødata
 Hent frå NVE sine servicer. www.xgeo.no
 ** DONE Legg til i kart frå wms.
-https://www.mapbox.com/mapbox.js/example/v1.0.0/wms/
+   https://www.mapbox.com/mapbox.js/example/v1.0.0/wms/
 ** TODO Sjekk med NVE om bruk er ok?
 ** TODO Skredfaregrad
 Finn ut om varsom.no/NVE har tilgjengeleg varsel/observasjon. http://api.nve.no/
+Vis faregrad for området ein har tegna rute. http://api01.nve.no/avalanchedoc.html
 ** TODO Skredterreng
 http://gis2.ngi.no/arcgisprodpub/rest/services/Skred/BratteOmr/MapServer/export?dpi=96&transparent=true&format=png24&layers=show%3A0&bbox=7984.395902125085%2C6795358.564050461%2C106536.59300651931%2C6863176.699686733&bboxSR=25833&imageSR=25833&size=1164%2C801&f=image
-
+Vanskeleg med mapbox og andre Leaflet-plugins. Rekne ut brattheit sjølv?
 
 * TODO Værdata
 Hent frå met.no sine api/servicer
@@ -31,9 +30,15 @@ Hent frå met.no sine api/servicer
 *** TODO Legg i kart
 *** TODO Sjå observert veir frå næraste målestasjon
 ** TODO Vind (animasjon?)
+https://github.com/cambecc/earth
+http://hint.fm/wind/
 
 * TODO Tegne rute i kart
 ** TODO Lengde
+*** TODO Vis total lengde
 ** TODO Høgdeprofil
+*** TODO Hent høgdeprofil frå kartverket. Må lagre gpx fil ein plass og serve til service.
+https://azure.microsoft.com/nb-no/documentation/articles/storage-nodejs-how-to-use-blob-storage/
+sett opp node-server for å ta imot linedata, konvertere til gpx, last opp til blob, og send til kartverket
 
 * TODO Lisensgreier. Legg til navn for tenester
