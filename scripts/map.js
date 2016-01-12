@@ -1,6 +1,7 @@
 // require('proj4leaflet');
 // require('mapbox.js');
 var request = require('superagent');
+var moment = require('moment');
 
 var accessToken = 'pk.eyJ1IjoidG9tYXNvcyIsImEiOiJjaWo5eDBhYjIwMDNzdWxtNGI3djYyN3kwIn0.s5d5WYpNNZJ-yIFwKXhxNQ';
 
@@ -25,7 +26,7 @@ var map = L.mapbox.map('map', 'tomasos.f0f39342').setView([61.31426439067928, 6.
 // &SERVICE=WMS&REQUEST=GetMap&FORMAT=image/png&TRANSPARENT=TRUE&STYLES=&VERSION=1.1.1&LAYERS=sd
 // &WIDTH=1439&HEIGHT=732&SRS=EPSG:32633&BBOX=-383655.77139954286,6419386.466852932,591028.844636356,6915195.458470915
 
-var snowDepth = L.tileLayer.wms('http://gridwms.nve.no/WMS_server/wms_server.aspx', {
+var snowDepth = L.tileLayer.wms('http://gridwms.nve.no/WMS_server/wms_server.aspx?time=' + moment().format('YYYY-MM-DD'), {
   format: 'image/png',
   transparent: 'true',
   layers: 'sd',
@@ -34,7 +35,7 @@ var snowDepth = L.tileLayer.wms('http://gridwms.nve.no/WMS_server/wms_server.asp
   tileSize: 256
 }).addTo(map);
 
-var newSnow7 = L.tileLayer.wms('http://gridwms.nve.no/WMS_server/wms_server.aspx', {
+var newSnow7 = L.tileLayer.wms('http://gridwms.nve.no/WMS_server/wms_server.aspx?time=' + moment().format('YYYY-MM-DD'), {
   format: 'image/png',
   transparent: 'true',
   layers: 'fswwk',
@@ -43,10 +44,19 @@ var newSnow7 = L.tileLayer.wms('http://gridwms.nve.no/WMS_server/wms_server.aspx
   tileSize: 256
 }).addTo(map);
 
-var temperature = L.tileLayer.wms('http://gridwms.nve.no/WMS_server/wms_server.aspx', {
+var temperature = L.tileLayer.wms('http://gridwms.nve.no/WMS_server/wms_server.aspx?time=' + moment().format('YYYY-MM-DD'), {
   format: 'image/png',
   transparent: 'true',
   layers: 'tm',
+  crs: crs,
+  opacity: 0.0,
+  tileSize: 256
+}).addTo(map);
+
+var temperatureChange = L.tileLayer.wms('http://gridwms.nve.no/WMS_server/wms_server.aspx?time=' + moment().format('YYYY-MM-DD'), {
+  format: 'image/png',
+  transparent: 'true',
+  layers: 'tmgr',
   crs: crs,
   opacity: 0.0,
   tileSize: 256
@@ -84,6 +94,13 @@ document.getElementById('temperature').onclick = function () {
     return false;
 };
 
+document.getElementById('temperatureChange').onclick = function () {
+    var enable = this.className !== 'active';
+    temperatureChange.setOpacity(enable ? 0.5 : 0);
+    this.className = enable ? 'active' : '';
+    return false;
+};
+
 map.on('click', function(e) {
   var lat = e.latlng.lat;
   var lng = e.latlng.lng;
@@ -96,7 +113,7 @@ map.on('click', function(e) {
   console.log(distance);
 
   previousPoint = newPoint;
-  
+
   // request
   //   .get('https://api.mapbox.com/v4/surface/mapbox.mapbox-terrain-v1.json?layer=contour&fields=ele&points=-116.64267,36.23935;-116.64898,36.24107&access_token=' + accessToken)
   //   .end(function(err, res) {
@@ -108,5 +125,3 @@ map.on('click', function(e) {
 map.on('dblclick', function(e) {
 
 });
-
-

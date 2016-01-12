@@ -15,6 +15,7 @@
     "grunt-contrib-connect": "^0.11.2",
     "grunt-contrib-watch": "^0.6.1",
     "mapbox.js": "^2.2.3",
+    "moment": "^2.11.1",
     "proj4leaflet": "^0.7.2",
     "superagent": "^1.6.1"
   }
