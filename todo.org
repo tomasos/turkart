@@ -27,6 +27,7 @@ Hent frå met.no sine api/servicer
 ** TODO Radarbileter?
 ** TODO GRIB?
 ** TODO Målestasjoner
+hent data med soap frå eklima.met.no
 *** TODO Legg i kart
 *** TODO Sjå observert veir frå næraste målestasjon
 ** TODO Vind (animasjon?)
