@@ -26,80 +26,129 @@ var map = L.mapbox.map('map', 'tomasos.f0f39342').setView([61.31426439067928, 6.
 // &SERVICE=WMS&REQUEST=GetMap&FORMAT=image/png&TRANSPARENT=TRUE&STYLES=&VERSION=1.1.1&LAYERS=sd
 // &WIDTH=1439&HEIGHT=732&SRS=EPSG:32633&BBOX=-383655.77139954286,6419386.466852932,591028.844636356,6915195.458470915
 
-var snowDepth = L.tileLayer.wms('http://gridwms.nve.no/WMS_server/wms_server.aspx?time=' + moment().format('YYYY-MM-DD'), {
-  format: 'image/png',
-  transparent: 'true',
-  layers: 'sd',
-  crs: crs,
-  opacity: 0.0,
-  tileSize: 256
-}).addTo(map);
 
-var newSnow7 = L.tileLayer.wms('http://gridwms.nve.no/WMS_server/wms_server.aspx?time=' + moment().format('YYYY-MM-DD'), {
-  format: 'image/png',
-  transparent: 'true',
-  layers: 'fswwk',
-  crs: crs,
-  opacity: 0.0,
-  tileSize: 256
-}).addTo(map);
 
-var temperature = L.tileLayer.wms('http://gridwms.nve.no/WMS_server/wms_server.aspx?time=' + moment().format('YYYY-MM-DD'), {
-  format: 'image/png',
-  transparent: 'true',
-  layers: 'tm',
-  crs: crs,
-  opacity: 0.0,
-  tileSize: 256
-}).addTo(map);
 
-var temperatureChange = L.tileLayer.wms('http://gridwms.nve.no/WMS_server/wms_server.aspx?time=' + moment().format('YYYY-MM-DD'), {
-  format: 'image/png',
-  transparent: 'true',
-  layers: 'tmgr',
-  crs: crs,
-  opacity: 0.0,
-  tileSize: 256
-}).addTo(map);
+
 
 // var avalance = L.esri.featureLayer({
 //   url: 'http://gis2.ngi.no/arcgisprodpub/rest/services/Skred/BratteOmr/MapServer/export'
 // }).addTo(map);
 
-var polyline = L.polyline([]).addTo(map);
+var polyline = {};
 
 var distance = 0;
 var previousPoint = null;
 
-var showSnowDepth = false;
+
+
+
+var gotSnowDepth = false;
+
+var snowDepth = {};
 
 document.getElementById('snowdepth').onclick = function () {
-    var enable = this.className !== 'active';
-    snowDepth.setOpacity(enable ? 0.3 : 0);
-    this.className = enable ? 'active' : '';
-    return false;
+  if(!gotSnowDepth) {
+    snowDepth = L.tileLayer.wms('http://gridwms.nve.no/WMS_server/wms_server.aspx?time=' + moment().format('YYYY-MM-DD'), {
+      format: 'image/png',
+      transparent: 'true',
+      layers: 'sd',
+      crs: crs,
+      opacity: 0.0,
+      tileSize: 256
+    }).addTo(map);
+
+    gotSnowDepth = true;
+  }
+  
+  var enable = this.className !== 'active';
+  snowDepth.setOpacity(enable ? 0.3 : 0);
+  this.className = enable ? 'active' : '';
+  return false;
 };
+
+var newSnow7 = {};
+
+var gotNewSnow7 = false;
 
 document.getElementById('newSnow7').onclick = function () {
-    var enable = this.className !== 'active';
-    newSnow7.setOpacity(enable ? 0.3 : 0);
-    this.className = enable ? 'active' : '';
-    return false;
+
+  if(!gotNewSnow7) {
+    newSnow7 = L.tileLayer.wms('http://gridwms.nve.no/WMS_server/wms_server.aspx?time=' + moment().format('YYYY-MM-DD'), {
+      format: 'image/png',
+      transparent: 'true',
+      layers: 'fswwk',
+      crs: crs,
+      opacity: 0.0,
+      tileSize: 256
+    }).addTo(map);
+    gotNewSnow7 = true;
+  }
+
+  var enable = this.className !== 'active';
+  newSnow7.setOpacity(enable ? 0.3 : 0);
+  this.className = enable ? 'active' : '';
+  return false;
 };
 
+var temperature = {};
+
+var gotTemperature = false;
+
 document.getElementById('temperature').onclick = function () {
+  if(!gotTemperature) {
+    var temperature = L.tileLayer.wms('http://gridwms.nve.no/WMS_server/wms_server.aspx?time=' + moment().format('YYYY-MM-DD'), {
+      format: 'image/png',
+      transparent: 'true',
+      layers: 'tm',
+      crs: crs,
+      opacity: 0.0,
+      tileSize: 256
+    }).addTo(map);
+    
+    gotTemperature = true;
+  }
+  
     var enable = this.className !== 'active';
     temperature.setOpacity(enable ? 0.3 : 0);
     this.className = enable ? 'active' : '';
     return false;
 };
 
+var temperatureChange = {};
+var gotTemperatureChange = false;
+
 document.getElementById('temperatureChange').onclick = function () {
+
+  if(!gotTemperatureChange) {
+    var temperatureChange = L.tileLayer.wms('http://gridwms.nve.no/WMS_server/wms_server.aspx?time=' + moment().format('YYYY-MM-DD'), {
+      format: 'image/png',
+      transparent: 'true',
+      layers: 'tmgr',
+      crs: crs,
+      opacity: 0.0,
+      tileSize: 256
+    }).addTo(map);
+    
+    gotTemperatureChange = true;
+  }
+  
     var enable = this.className !== 'active';
     temperatureChange.setOpacity(enable ? 0.5 : 0);
     this.className = enable ? 'active' : '';
     return false;
 };
+
+document.getElementById('clearDrawing').onclick = function() {
+  map.removeLayer(polyline);
+  polyline = L.polyline([]);
+  document.getElementById('distance').innerHTML = '';
+};
+
+document.getElementById('startDrawing').onclick = function() {
+  polyline = L.polyline([]).addTo(map);
+}
+
 
 map.on('click', function(e) {
   var lat = e.latlng.lat;
@@ -110,15 +159,10 @@ map.on('click', function(e) {
   if(previousPoint) {
     distance += previousPoint.distanceTo(newPoint);
   }
-  console.log(distance);
+
+  document.getElementById('distance').innerHTML = distance.toFixed(2);
 
   previousPoint = newPoint;
-
-  // request
-  //   .get('https://api.mapbox.com/v4/surface/mapbox.mapbox-terrain-v1.json?layer=contour&fields=ele&points=-116.64267,36.23935;-116.64898,36.24107&access_token=' + accessToken)
-  //   .end(function(err, res) {
-  //   console.log(res);
-  // });
 
 });
 
