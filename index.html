@@ -3,13 +3,8 @@
   <link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.3/mapbox.css' rel='stylesheet'
         />
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-1.0.0-b1/leaflet.css" />
-
-
-  <style>
-    body { margin:0; padding:0; }
-    .map { position:absolute; top:0; bottom:0; left: 100px; right: 0; width:100%; }
-    .menu { position: absolute; top: 0px; left: 0px; width: 100px; }
-  </style>
+  <link rel="stylesheet" href="css/screen.css" />
+  
 </head>
 <body>
   <div class="menu">
@@ -17,9 +12,20 @@
     <button id="newSnow7">Nysnø siste 7 døgn</button>
     <button id="temperature">Temperatur</button>
     <button id="temperatureChange">Temperaturendring</button>
-
   </div>
-  <div id="height-data"></div>
+
+  
+  
+  <div id="route-data" class="route-data">
+    <div class="route-data-content">
+      <div class="draw-menu">
+        <button id="startDrawing">Draw</button>
+        <button id="clearDrawing">Clear</button>
+      </div>
+      <div id="distance"></div>
+      <div id="height"></div>
+    </div>
+  </div>
   <div id="map" class="map">
 
   </div>

@@ -1,0 +1,19 @@
+.route-data {
+    position: absolute;
+    bottom: 0;
+
+    width: 100%;
+
+    z-index: 1;
+    
+    
+    &-content {
+        height: 80px;
+        width: 60%;
+
+        margin: auto;
+
+        background: rgba(255, 255, 255, 0.5);
+    }
+
+}
