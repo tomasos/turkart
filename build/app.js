@@ -5149,7 +5149,7 @@ document.getElementById('clearDrawing').onclick = function() {
 
 document.getElementById('startDrawing').onclick = function() {
   polyline = L.polyline([]).addTo(map);
-}
+};
 
 
 map.on('click', function(e) {
