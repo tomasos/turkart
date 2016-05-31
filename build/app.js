@@ -5005,6 +5005,8 @@ module.exports = function(arr, fn, initial){
 var request = require('superagent');
 var moment = require('moment');
 
+
+
 var accessToken = 'pk.eyJ1IjoidG9tYXNvcyIsImEiOiJjaWo5eDBhYjIwMDNzdWxtNGI3djYyN3kwIn0.s5d5WYpNNZJ-yIFwKXhxNQ';
 
 var crs = new L.Proj.CRS(
@@ -5037,7 +5039,7 @@ var map = L.mapbox.map('map', 'tomasos.f0f39342').setView([61.31426439067928, 6.
 //   url: 'http://gis2.ngi.no/arcgisprodpub/rest/services/Skred/BratteOmr/MapServer/export'
 // }).addTo(map);
 
-var polyline = {};
+polyline = {};
 
 var distance = 0;
 var previousPoint = null;
